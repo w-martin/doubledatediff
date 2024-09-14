@@ -23,3 +23,15 @@ Then, to run the docker image, run:
 ```shell
 docker run -p 8080:8080 spring-boot-docker
 ```
+
+A collection of sample requests is included in http format.
+
+(Optional) To install IntelliJ IDEA HTTP Client, run:
+```shell
+curl -f -L -o ijhttp.zip "https://jb.gg/ijhttp/latest" && unzip -q ijhttp.zip && rm ijhttp.zip
+```
+
+Verify the deployment by running sample requests:
+```shell
+./ijhttp/ijhttp sample-requests.http
+```
