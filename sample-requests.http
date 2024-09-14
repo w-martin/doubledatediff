@@ -1,0 +1,8 @@
+###
+@dateOne = 1901-04-03
+@dateTwo = 2008-01-22
+GET http://localhost:8080/doubledatediff/{{dateOne}}/{{dateTwo}}
+
+###
+@dateThree = 1994-04-10
+GET http://localhost:8080/doubledatediff/{{dateTwo}}/{{dateThree}}
