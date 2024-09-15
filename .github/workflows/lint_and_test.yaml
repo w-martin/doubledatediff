@@ -1,0 +1,36 @@
+name: Lint and Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  lint_and_test:
+    name: Lint and Test
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: adopt
+          architecture: x64
+      - name: Lint
+        run: mvn --no-transfer-progress spotless:check -f spotless.xml
+      - name: Test
+        run: mvn --no-transfer-progress test jacoco:report
+      - name: Jacoco Report to PR
+        id: jacoco-report
+        uses: madrapps/jacoco-report@v1.7.0
+        with:
+          paths: target/site/jacoco/jacoco.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-coverage-overall: 80
+          min-coverage-changed-files: 80
+          title: Code Coverage
+          update-comment: true
