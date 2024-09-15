@@ -25,7 +25,7 @@ jobs:
       - name: Test
         run: mvn test jacoco:report
       - name: Jacoco Report to PR
-        id: jacoco
+        id: jacoco-report
         uses: madrapps/jacoco-report@v1.7.0
         with:
           paths: target/site/jacoco/jacoco.xml
