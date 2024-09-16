@@ -1,6 +1,6 @@
 package com.will_martin.application;
 
-import com.will_martin.domain.DoubleDateDiffService;
+import com.will_martin.model.DoubleDateDiffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -12,19 +12,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @RestController
-public class DoubleDateDiffController {
+public class DoubleDateDiffApi {
     private final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     private final DoubleDateDiffService doubleDateDiffService;
 
     @Autowired
-    public DoubleDateDiffController(DoubleDateDiffService doubleDateDiffService) {
+    public DoubleDateDiffApi(DoubleDateDiffService doubleDateDiffService) {
         this.doubleDateDiffService = doubleDateDiffService;
     }
 
     @GetMapping(value = "/doubledatediff/{dateOne}/{dateTwo}")
     public ResponseEntity<String> getDoubleDateDiff(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateOne,
                                                     @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateTwo) {
-        final Date result = doubleDateDiffService.getDoubleDateDiffUnsorted(dateOne, dateTwo);
+        final Date result = doubleDateDiffService.getDoubleDateDiff(dateOne, dateTwo);
         return ResponseEntity.ok(formatter.format(result));
     }
 }

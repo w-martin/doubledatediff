@@ -1,5 +1,6 @@
 package com.will_martin.domain;
 
+import com.will_martin.model.DoubleDateDiffService;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.slf4j.Logger;
@@ -11,15 +12,15 @@ import java.util.Date;
 import java.util.List;
 
 @Component("doubleDateDiffService")
-public class DoubleDateDiffService {
+public class JodaDoubleDateDiffService implements DoubleDateDiffService {
     final Logger logger;
 
-    public DoubleDateDiffService() {
-        logger = LoggerFactory.getLogger(DoubleDateDiffService.class);
+    public JodaDoubleDateDiffService() {
+        logger = LoggerFactory.getLogger(JodaDoubleDateDiffService.class);
     }
 
     @Cacheable(keyGenerator = "dateKeyGenerator", value = "getDoubleDateDiffUnsorted")
-    public Date getDoubleDateDiffUnsorted(Date dateOne, Date dateTwo) {
+    public Date getDoubleDateDiff(Date dateOne, Date dateTwo) {
         List<Date> sortedDates = new java.util.ArrayList<>(List.of(dateOne, dateTwo));
         sortedDates.sort(Date::compareTo);
         Date dateFrom = sortedDates.get(0);
