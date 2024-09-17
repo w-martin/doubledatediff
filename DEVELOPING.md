@@ -1,9 +1,23 @@
+# Running tests
+
+To run tests, run:
+```shell
+mvn test
+```
+
+To generate a test coverage report, run:
+```shell
+mvn clean test jacoco:report
+```
+
+# Running the application
+
 ## To update mvnw script
 ```sh
 mvn -N io.takari:maven:wrapper
 ```
 
-# Running locally
+## Running locally
 
 To run locally, please install java 21.
 Then, run
@@ -11,7 +25,7 @@ Then, run
 ./mvnw spring-boot:run
 ```
 
-# Running in docker
+## Running in docker
 
 To build the docker image, run:
 ```shell
