@@ -1,23 +1,18 @@
 package com.will_martin.domain;
 
 import com.will_martin.model.DoubleDateDiffService;
+import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
-@Component("doubleDateDiffService")
+@Slf4j
+@Service("doubleDateDiffService")
 public class JodaDoubleDateDiffService implements DoubleDateDiffService {
-    final Logger logger;
-
-    public JodaDoubleDateDiffService() {
-        logger = LoggerFactory.getLogger(JodaDoubleDateDiffService.class);
-    }
 
     @Cacheable(keyGenerator = "dateKeyGenerator", value = "getDoubleDateDiffUnsorted")
     public Date getDoubleDateDiff(Date dateOne, Date dateTwo) {
@@ -33,7 +28,7 @@ public class JodaDoubleDateDiffService implements DoubleDateDiffService {
         DateTime doubleDate = new DateTime(dateTo).plusDays(
                 Days.daysBetween(new DateTime(dateFrom).toLocalDate(), new DateTime(dateTo).toLocalDate()).getDays()
         );
-        logger.debug("Double date is: {}", doubleDate);
+        log.info("Double date is: {}", doubleDate);
         return doubleDate.toDate();
     }
 }
